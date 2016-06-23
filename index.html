@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="SketchPad.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+		<script type="text/javascript">
+ 
+			var create = function(option) {
+				$('.container').html("");
+
+				var input = prompt('Enter the size of the SketchPad');
+
+ 				if(input >= 1 && input <= 64){
+ 					var square_size = $('.container').width()/input - 2;
+
+					for(var i = 0; i < input; i++) {
+						for (var j = 0; j < input; j++) { 
+							var $div = $("<div class='square'></div>");
+ 							$div.appendTo('.container');
+ 						}
+					}
+					$('.square').css('height',square_size);
+					$('.square').css('width',square_size);
+
+					$('.square').mouseenter(function() {
+						switch(option){
+
+						case 1:	
+							$(this).addClass('lit');
+							break;
+						case 2:
+							$(this).css("background-color", getColor());
+							break;
+						}
+					});
+
+					function getColor(){
+						var r = Math.floor((Math.random()*255)+1);
+						var g = Math.floor((Math.random()*255)+1);
+						var b = Math.floor((Math.random()*255)+1);
+
+						return "rgb("+ r +", "+ g +", "+ b +")";
+					}
+				}
+			};
+
+		</script> 
+
+		<title>SketchPad</title>
+	</head>
+	<body>
+		<button id="button" onclick="create(1)">Normal</button>
+		<button id="button" onclick="create(2)">Multi Color</button>
+		<div class="container"></div>
+	</body>
+</html>
